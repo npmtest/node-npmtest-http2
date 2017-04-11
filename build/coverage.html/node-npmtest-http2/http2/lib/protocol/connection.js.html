@@ -1,0 +1,2084 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-http2/http2/lib/protocol/connection.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-http2">npmtest-http2 (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-http2/http2/lib/protocol/connection.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">13.99% <small>(34 / 243)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 104)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 31)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">13.99% <small>(34 / 243)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-http2/http2/lib/protocol/</a> &#187; connection.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var assert = require('assert');
+&nbsp;
+// The Connection class
+// ====================
+&nbsp;
+// The Connection class manages HTTP/2 connections. Each instance corresponds to one transport
+// stream (TCP stream). It operates by sending and receiving frames and is implemented as a
+// [Flow](flow.html) subclass.
+&nbsp;
+var Flow = require('./flow').Flow;
+&nbsp;
+exports.Connection = Connection;
+&nbsp;
+// Public API
+// ----------
+&nbsp;
+// * **new Connection(log, firstStreamId, settings)**: create a new Connection
+//
+// * **Event: 'error' (type)**: signals a connection level error made by the other end
+//
+// * **Event: 'peerError' (type)**: signals the receipt of a GOAWAY frame that contains an error
+//   code other than NO_ERROR
+//
+// * **Event: 'stream' (stream)**: signals that there's an incoming stream
+//
+// * **createStream(): stream**: initiate a new stream
+//
+// * **set(settings, callback)**: change the value of one or more settings according to the
+//   key-value pairs of `settings`. The callback is called after the peer acknowledged the changes.
+//
+// * **ping([callback])**: send a ping and call callback when the answer arrives
+//
+// * **close([error])**: close the stream with an error code
+&nbsp;
+// Constructor
+// -----------
+&nbsp;
+// The main aspects of managing the connection are:
+<span class="fstat-no" title="function not covered" >function Connection(log, firstStreamId, settings) {</span>
+  // * initializing the base class
+<span class="cstat-no" title="statement not covered" >  Flow.call(this, 0);</span>
+&nbsp;
+  // * logging: every method uses the common logger object
+<span class="cstat-no" title="statement not covered" >  this._log = log.child({ component: 'connection' });</span>
+&nbsp;
+  // * stream management
+<span class="cstat-no" title="statement not covered" >  this._initializeStreamManagement(firstStreamId);</span>
+&nbsp;
+  // * lifecycle management
+<span class="cstat-no" title="statement not covered" >  this._initializeLifecycleManagement();</span>
+&nbsp;
+  // * flow control
+<span class="cstat-no" title="statement not covered" >  this._initializeFlowControl();</span>
+&nbsp;
+  // * settings management
+<span class="cstat-no" title="statement not covered" >  this._initializeSettingsManagement(settings);</span>
+&nbsp;
+  // * multiplexing
+<span class="cstat-no" title="statement not covered" >  this._initializeMultiplexing();</span>
+}
+Connection.prototype = Object.create(Flow.prototype, { constructor: { value: Connection } });
+&nbsp;
+// Overview
+// --------
+&nbsp;
+//              |    ^             |    ^
+//              v    |             v    |
+//         +--------------+   +--------------+
+//     +---|   stream1    |---|   stream2    |----      ....      ---+
+//     |   | +----------+ |   | +----------+ |                       |
+//     |   | | stream1. | |   | | stream2. | |                       |
+//     |   +-| upstream |-+   +-| upstream |-+                       |
+//     |     +----------+       +----------+                         |
+//     |       |     ^             |     ^                           |
+//     |       v     |             v     |                           |
+//     |       +-----+-------------+-----+--------      ....         |
+//     |       ^     |             |     |                           |
+//     |       |     v             |     |                           |
+//     |   +--------------+        |     |                           |
+//     |   |   stream0    |        |     |                           |
+//     |   |  connection  |        |     |                           |
+//     |   |  management  |     multiplexing                         |
+//     |   +--------------+     flow control                         |
+//     |                           |     ^                           |
+//     |                   _read() |     | _write()                  |
+//     |                           v     |                           |
+//     |                +------------+ +-----------+                 |
+//     |                |output queue| |input queue|                 |
+//     +----------------+------------+-+-----------+-----------------+
+//                                 |     ^
+//                          read() |     | write()
+//                                 v     |
+&nbsp;
+// Stream management
+// -----------------
+&nbsp;
+var Stream  = require('./stream').Stream;
+&nbsp;
+// Initialization:
+Connection.prototype._initializeStreamManagement = <span class="fstat-no" title="function not covered" >function _initializeStreamManagement(firstStreamId) {</span>
+  // * streams are stored in two data structures:
+  //   * `_streamIds` is an id -&gt; stream map of the streams that are allowed to receive frames.
+  //   * `_streamPriorities` is a priority -&gt; [stream] map of stream that allowed to send frames.
+<span class="cstat-no" title="statement not covered" >  this._streamIds = [];</span>
+<span class="cstat-no" title="statement not covered" >  this._streamPriorities = [];</span>
+&nbsp;
+  // * The next outbound stream ID and the last inbound stream id
+<span class="cstat-no" title="statement not covered" >  this._nextStreamId = firstStreamId;</span>
+<span class="cstat-no" title="statement not covered" >  this._lastIncomingStream = 0;</span>
+&nbsp;
+  // * Calling `_writeControlFrame` when there's an incoming stream with 0 as stream ID
+<span class="cstat-no" title="statement not covered" >  this._streamIds[0] = { upstream: { write: this._writeControlFrame.bind(this) } };</span>
+&nbsp;
+  // * By default, the number of concurrent outbound streams is not limited. The `_streamLimit` can
+  //   be set by the SETTINGS_MAX_CONCURRENT_STREAMS setting.
+<span class="cstat-no" title="statement not covered" >  this._streamSlotsFree = Infinity;</span>
+<span class="cstat-no" title="statement not covered" >  this._streamLimit = Infinity;</span>
+<span class="cstat-no" title="statement not covered" >  this.on('RECEIVING_SETTINGS_MAX_CONCURRENT_STREAMS', this._updateStreamLimit);</span>
+};
+&nbsp;
+// `_writeControlFrame` is called when there's an incoming frame in the `_control` stream. It
+// broadcasts the message by creating an event on it.
+Connection.prototype._writeControlFrame = <span class="fstat-no" title="function not covered" >function _writeControlFrame(frame) {</span>
+<span class="cstat-no" title="statement not covered" >  if ((frame.type === 'SETTINGS') || (frame.type === 'PING') ||</span>
+      (frame.type === 'GOAWAY') || (frame.type === 'WINDOW_UPDATE') ||
+      (frame.type === 'ALTSVC')) {
+<span class="cstat-no" title="statement not covered" >    this._log.debug({ frame: frame }, 'Receiving connection level frame');</span>
+<span class="cstat-no" title="statement not covered" >    this.emit(frame.type, frame);</span>
+  } else {
+<span class="cstat-no" title="statement not covered" >    this._log.error({ frame: frame }, 'Invalid connection level frame');</span>
+<span class="cstat-no" title="statement not covered" >    this.emit('error', 'PROTOCOL_ERROR');</span>
+  }
+};
+&nbsp;
+// Methods to manage the stream slot pool:
+Connection.prototype._updateStreamLimit = <span class="fstat-no" title="function not covered" >function _updateStreamLimit(newStreamLimit) {</span>
+<span class="cstat-no" title="statement not covered" >  var wakeup = (this._streamSlotsFree === 0) &amp;&amp; (newStreamLimit &gt; this._streamLimit);</span>
+<span class="cstat-no" title="statement not covered" >  this._streamSlotsFree += newStreamLimit - this._streamLimit;</span>
+<span class="cstat-no" title="statement not covered" >  this._streamLimit = newStreamLimit;</span>
+<span class="cstat-no" title="statement not covered" >  if (wakeup) {</span>
+<span class="cstat-no" title="statement not covered" >    this.emit('wakeup');</span>
+  }
+};
+&nbsp;
+Connection.prototype._changeStreamCount = <span class="fstat-no" title="function not covered" >function _changeStreamCount(change) {</span>
+<span class="cstat-no" title="statement not covered" >  if (change) {</span>
+<span class="cstat-no" title="statement not covered" >    this._log.trace({ free: this._streamSlotsFree, change: change },</span>
+                    'Changing active stream count.');
+<span class="cstat-no" title="statement not covered" >    var wakeup = (this._streamSlotsFree === 0) &amp;&amp; (change &lt; 0);</span>
+<span class="cstat-no" title="statement not covered" >    this._streamSlotsFree -= change;</span>
+<span class="cstat-no" title="statement not covered" >    if (wakeup) {</span>
+<span class="cstat-no" title="statement not covered" >      this.emit('wakeup');</span>
+    }
+  }
+};
+&nbsp;
+// Creating a new *inbound or outbound* stream with the given `id` (which is undefined in case of
+// an outbound stream) consists of three steps:
+//
+// 1. var stream = new Stream(this._log, this);
+// 2. this._allocateId(stream, id);
+// 2. this._allocatePriority(stream);
+&nbsp;
+// Allocating an ID to a stream
+Connection.prototype._allocateId = <span class="fstat-no" title="function not covered" >function _allocateId(stream, id) {</span>
+  // * initiated stream without definite ID
+<span class="cstat-no" title="statement not covered" >  if (id === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >    id = this._nextStreamId;</span>
+<span class="cstat-no" title="statement not covered" >    this._nextStreamId += 2;</span>
+  }
+&nbsp;
+  // * incoming stream with a legitim ID (larger than any previous and different parity than ours)
+  else <span class="cstat-no" title="statement not covered" >if ((id &gt; this._lastIncomingStream) &amp;&amp; ((id - this._nextStreamId) % 2 !== 0)) {</span>
+<span class="cstat-no" title="statement not covered" >    this._lastIncomingStream = id;</span>
+  }
+&nbsp;
+  // * incoming stream with invalid ID
+  else {
+<span class="cstat-no" title="statement not covered" >    this._log.error({ stream_id: id, lastIncomingStream: this._lastIncomingStream },</span>
+                    'Invalid incoming stream ID.');
+<span class="cstat-no" title="statement not covered" >    this.emit('error', 'PROTOCOL_ERROR');</span>
+<span class="cstat-no" title="statement not covered" >    return undefined;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  assert(!(id in this._streamIds));</span>
+&nbsp;
+  // * adding to `this._streamIds`
+<span class="cstat-no" title="statement not covered" >  this._log.trace({ s: stream, stream_id: id }, 'Allocating ID for stream.');</span>
+<span class="cstat-no" title="statement not covered" >  this._streamIds[id] = stream;</span>
+<span class="cstat-no" title="statement not covered" >  stream.id = id;</span>
+<span class="cstat-no" title="statement not covered" >  this.emit('new_stream', stream, id);</span>
+&nbsp;
+  // * forwarding connection errors from streams
+<span class="cstat-no" title="statement not covered" >  stream.on('connectionError', this.emit.bind(this, 'error'));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return id;</span>
+};
+&nbsp;
+// Allocating a priority to a stream, and managing priority changes
+Connection.prototype._allocatePriority = <span class="fstat-no" title="function not covered" >function _allocatePriority(stream) {</span>
+<span class="cstat-no" title="statement not covered" >  this._log.trace({ s: stream }, 'Allocating priority for stream.');</span>
+<span class="cstat-no" title="statement not covered" >  this._insert(stream, stream._priority);</span>
+<span class="cstat-no" title="statement not covered" >  stream.on('priority', this._reprioritize.bind(this, stream));</span>
+<span class="cstat-no" title="statement not covered" >  stream.upstream.on('readable', this.emit.bind(this, 'wakeup'));</span>
+<span class="cstat-no" title="statement not covered" >  this.emit('wakeup');</span>
+};
+&nbsp;
+Connection.prototype._insert = <span class="fstat-no" title="function not covered" >function _insert(stream, priority) {</span>
+<span class="cstat-no" title="statement not covered" >  if (priority in this._streamPriorities) {</span>
+<span class="cstat-no" title="statement not covered" >    this._streamPriorities[priority].push(stream);</span>
+  } else {
+<span class="cstat-no" title="statement not covered" >    this._streamPriorities[priority] = [stream];</span>
+  }
+};
+&nbsp;
+Connection.prototype._reprioritize = <span class="fstat-no" title="function not covered" >function _reprioritize(stream, priority) {</span>
+<span class="cstat-no" title="statement not covered" >  var bucket = this._streamPriorities[stream._priority];</span>
+<span class="cstat-no" title="statement not covered" >  var index = bucket.indexOf(stream);</span>
+<span class="cstat-no" title="statement not covered" >  assert(index !== -1);</span>
+<span class="cstat-no" title="statement not covered" >  bucket.splice(index, 1);</span>
+<span class="cstat-no" title="statement not covered" >  if (bucket.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >    delete this._streamPriorities[stream._priority];</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this._insert(stream, priority);</span>
+};
+&nbsp;
+// Creating an *inbound* stream with the given ID. It is called when there's an incoming frame to
+// a previously nonexistent stream.
+Connection.prototype._createIncomingStream = <span class="fstat-no" title="function not covered" >function _createIncomingStream(id) {</span>
+<span class="cstat-no" title="statement not covered" >  this._log.debug({ stream_id: id }, 'New incoming stream.');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var stream = new Stream(this._log, this);</span>
+<span class="cstat-no" title="statement not covered" >  this._allocateId(stream, id);</span>
+<span class="cstat-no" title="statement not covered" >  this._allocatePriority(stream);</span>
+<span class="cstat-no" title="statement not covered" >  this.emit('stream', stream, id);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return stream;</span>
+};
+&nbsp;
+// Creating an *outbound* stream
+Connection.prototype.createStream = <span class="fstat-no" title="function not covered" >function createStream() {</span>
+<span class="cstat-no" title="statement not covered" >  this._log.trace('Creating new outbound stream.');</span>
+&nbsp;
+  // * Receiving is enabled immediately, and an ID gets assigned to the stream
+<span class="cstat-no" title="statement not covered" >  var stream = new Stream(this._log, this);</span>
+<span class="cstat-no" title="statement not covered" >  this._allocatePriority(stream);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return stream;</span>
+};
+&nbsp;
+// Multiplexing
+// ------------
+&nbsp;
+Connection.prototype._initializeMultiplexing = <span class="fstat-no" title="function not covered" >function _initializeMultiplexing() {</span>
+<span class="cstat-no" title="statement not covered" >  this.on('window_update', this.emit.bind(this, 'wakeup'));</span>
+<span class="cstat-no" title="statement not covered" >  this._sendScheduled = false;</span>
+<span class="cstat-no" title="statement not covered" >  this._firstFrameReceived = false;</span>
+};
+&nbsp;
+// The `_send` method is a virtual method of the [Flow class](flow.html) that has to be implemented
+// by child classes. It reads frames from streams and pushes them to the output buffer.
+Connection.prototype._send = <span class="fstat-no" title="function not covered" >function _send(immediate) {</span>
+  // * Do not do anything if the connection is already closed
+<span class="cstat-no" title="statement not covered" >  if (this._closed) {</span>
+<span class="cstat-no" title="statement not covered" >    return;</span>
+  }
+&nbsp;
+  // * Collapsing multiple calls in a turn into a single deferred call
+<span class="cstat-no" title="statement not covered" >  if (immediate) {</span>
+<span class="cstat-no" title="statement not covered" >    this._sendScheduled = false;</span>
+  } else {
+<span class="cstat-no" title="statement not covered" >    if (!this._sendScheduled) {</span>
+<span class="cstat-no" title="statement not covered" >      this._sendScheduled = true;</span>
+<span class="cstat-no" title="statement not covered" >      setImmediate(this._send.bind(this, true));</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this._log.trace('Starting forwarding frames from streams.');</span>
+&nbsp;
+  // * Looping through priority `bucket`s in priority order.
+<span class="cstat-no" title="statement not covered" >priority_loop:</span>
+<span class="cstat-no" title="statement not covered" >  for (var priority in this._streamPriorities) {</span>
+<span class="cstat-no" title="statement not covered" >    var bucket = this._streamPriorities[priority];</span>
+<span class="cstat-no" title="statement not covered" >    var nextBucket = [];</span>
+&nbsp;
+    // * Forwarding frames from buckets with round-robin scheduling.
+    //   1. pulling out frame
+    //   2. if there's no frame, skip this stream
+    //   3. if forwarding this frame would make `streamCount` greater than `streamLimit`, skip
+    //      this stream
+    //   4. adding stream to the bucket of the next round
+    //   5. assigning an ID to the frame (allocating an ID to the stream if there isn't already)
+    //   6. if forwarding a PUSH_PROMISE, allocate ID to the promised stream
+    //   7. forwarding the frame, changing `streamCount` as appropriate
+    //   8. stepping to the next stream if there's still more frame needed in the output buffer
+    //   9. switching to the bucket of the next round
+<span class="cstat-no" title="statement not covered" >    while (bucket.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >      for (var index = 0; index &lt; bucket.length; index++) {</span>
+<span class="cstat-no" title="statement not covered" >        var stream = bucket[index];</span>
+<span class="cstat-no" title="statement not covered" >        var frame = stream.upstream.read((this._window &gt; 0) ? this._window : -1);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (!frame) {</span>
+<span class="cstat-no" title="statement not covered" >          continue;</span>
+        } else <span class="cstat-no" title="statement not covered" >if (frame.count_change &gt; this._streamSlotsFree) {</span>
+<span class="cstat-no" title="statement not covered" >          stream.upstream.unshift(frame);</span>
+<span class="cstat-no" title="statement not covered" >          continue;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        nextBucket.push(stream);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (frame.stream === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >          frame.stream = stream.id || this._allocateId(stream);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (frame.type === 'PUSH_PROMISE') {</span>
+<span class="cstat-no" title="statement not covered" >          this._allocatePriority(frame.promised_stream);</span>
+<span class="cstat-no" title="statement not covered" >          frame.promised_stream = this._allocateId(frame.promised_stream);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this._log.trace({ s: stream, frame: frame }, 'Forwarding outgoing frame');</span>
+<span class="cstat-no" title="statement not covered" >        var moreNeeded = this.push(frame);</span>
+<span class="cstat-no" title="statement not covered" >        this._changeStreamCount(frame.count_change);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        assert(moreNeeded !== null); </span>// The frame shouldn't be unforwarded
+<span class="cstat-no" title="statement not covered" >        if (moreNeeded === false) {</span>
+<span class="cstat-no" title="statement not covered" >          break priority_loop;</span>
+        }
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      bucket = nextBucket;</span>
+<span class="cstat-no" title="statement not covered" >      nextBucket = [];</span>
+    }
+  }
+&nbsp;
+  // * if we couldn't forward any frame, then sleep until window update, or some other wakeup event
+<span class="cstat-no" title="statement not covered" >  if (moreNeeded === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >    this.once('wakeup', this._send.bind(this));</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this._log.trace({ moreNeeded: moreNeeded }, 'Stopping forwarding frames from streams.');</span>
+};
+&nbsp;
+// The `_receive` method is another virtual method of the [Flow class](flow.html) that has to be
+// implemented by child classes. It forwards the given frame to the appropriate stream:
+Connection.prototype._receive = <span class="fstat-no" title="function not covered" >function _receive(frame, done) {</span>
+<span class="cstat-no" title="statement not covered" >  this._log.trace({ frame: frame }, 'Forwarding incoming frame');</span>
+&nbsp;
+  // * first frame needs to be checked by the `_onFirstFrameReceived` method
+<span class="cstat-no" title="statement not covered" >  if (!this._firstFrameReceived) {</span>
+<span class="cstat-no" title="statement not covered" >    this._firstFrameReceived = true;</span>
+<span class="cstat-no" title="statement not covered" >    this._onFirstFrameReceived(frame);</span>
+  }
+&nbsp;
+  // Do some sanity checking here before we create a stream
+<span class="cstat-no" title="statement not covered" >  if ((frame.type == 'SETTINGS' ||</span>
+       frame.type == 'PING' ||
+       frame.type == 'GOAWAY') &amp;&amp;
+      frame.stream != 0) {
+    // Got connection-level frame on a stream - EEP!
+<span class="cstat-no" title="statement not covered" >    this.close('PROTOCOL_ERROR');</span>
+<span class="cstat-no" title="statement not covered" >    return;</span>
+  } else <span class="cstat-no" title="statement not covered" >if ((frame.type == 'DATA' ||</span>
+              frame.type == 'HEADERS' ||
+              frame.type == 'PRIORITY' ||
+              frame.type == 'RST_STREAM' ||
+              frame.type == 'PUSH_PROMISE' ||
+              frame.type == 'CONTINUATION') &amp;&amp;
+             frame.stream == 0) {
+    // Got stream-level frame on connection - EEP!
+<span class="cstat-no" title="statement not covered" >    this.close('PROTOCOL_ERROR');</span>
+<span class="cstat-no" title="statement not covered" >    return;</span>
+  }
+  // WINDOW_UPDATE can be on either stream or connection
+&nbsp;
+  // * gets the appropriate stream from the stream registry
+<span class="cstat-no" title="statement not covered" >  var stream = this._streamIds[frame.stream];</span>
+&nbsp;
+  // * or creates one if it's not in `this.streams`
+<span class="cstat-no" title="statement not covered" >  if (!stream) {</span>
+<span class="cstat-no" title="statement not covered" >    stream = this._createIncomingStream(frame.stream);</span>
+  }
+&nbsp;
+  // * in case of PUSH_PROMISE, replaces the promised stream id with a new incoming stream
+<span class="cstat-no" title="statement not covered" >  if (frame.type === 'PUSH_PROMISE') {</span>
+<span class="cstat-no" title="statement not covered" >    frame.promised_stream = this._createIncomingStream(frame.promised_stream);</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  frame.count_change = this._changeStreamCount.bind(this);</span>
+&nbsp;
+  // * and writes it to the `stream`'s `upstream`
+<span class="cstat-no" title="statement not covered" >  stream.upstream.write(frame);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  done();</span>
+};
+&nbsp;
+// Settings management
+// -------------------
+&nbsp;
+var defaultSettings = {
+};
+&nbsp;
+// Settings management initialization:
+Connection.prototype._initializeSettingsManagement = <span class="fstat-no" title="function not covered" >function _initializeSettingsManagement(settings) {</span>
+  // * Setting up the callback queue for setting acknowledgements
+<span class="cstat-no" title="statement not covered" >  this._settingsAckCallbacks = [];</span>
+&nbsp;
+  // * Sending the initial settings.
+<span class="cstat-no" title="statement not covered" >  this._log.debug({ settings: settings },</span>
+                  'Sending the first SETTINGS frame as part of the connection header.');
+<span class="cstat-no" title="statement not covered" >  this.set(settings || defaultSettings);</span>
+&nbsp;
+  // * Forwarding SETTINGS frames to the `_receiveSettings` method
+<span class="cstat-no" title="statement not covered" >  this.on('SETTINGS', this._receiveSettings);</span>
+<span class="cstat-no" title="statement not covered" >  this.on('RECEIVING_SETTINGS_MAX_FRAME_SIZE', this._sanityCheckMaxFrameSize);</span>
+};
+&nbsp;
+// * Checking that the first frame the other endpoint sends is SETTINGS
+Connection.prototype._onFirstFrameReceived = <span class="fstat-no" title="function not covered" >function _onFirstFrameReceived(frame) {</span>
+<span class="cstat-no" title="statement not covered" >  if ((frame.stream === 0) &amp;&amp; (frame.type === 'SETTINGS')) {</span>
+<span class="cstat-no" title="statement not covered" >    this._log.debug('Receiving the first SETTINGS frame as part of the connection header.');</span>
+  } else {
+<span class="cstat-no" title="statement not covered" >    this._log.fatal({ frame: frame }, 'Invalid connection header: first frame is not SETTINGS.');</span>
+<span class="cstat-no" title="statement not covered" >    this.emit('error', 'PROTOCOL_ERROR');</span>
+  }
+};
+&nbsp;
+// Handling of incoming SETTINGS frames.
+Connection.prototype._receiveSettings = <span class="fstat-no" title="function not covered" >function _receiveSettings(frame) {</span>
+  // * If it's an ACK, call the appropriate callback
+<span class="cstat-no" title="statement not covered" >  if (frame.flags.ACK) {</span>
+<span class="cstat-no" title="statement not covered" >    var callback = this._settingsAckCallbacks.shift();</span>
+<span class="cstat-no" title="statement not covered" >    if (callback) {</span>
+<span class="cstat-no" title="statement not covered" >      callback();</span>
+    }
+  }
+&nbsp;
+  // * If it's a setting change request, then send an ACK and change the appropriate settings
+  else {
+<span class="cstat-no" title="statement not covered" >    if (!this._closed) {</span>
+<span class="cstat-no" title="statement not covered" >      this.push({</span>
+        type: 'SETTINGS',
+        flags: { ACK: true },
+        stream: 0,
+        settings: {}
+      });
+    }
+<span class="cstat-no" title="statement not covered" >    for (var name in frame.settings) {</span>
+<span class="cstat-no" title="statement not covered" >      this.emit('RECEIVING_' + name, frame.settings[name]);</span>
+    }
+  }
+};
+&nbsp;
+Connection.prototype._sanityCheckMaxFrameSize = <span class="fstat-no" title="function not covered" >function _sanityCheckMaxFrameSize(value) {</span>
+<span class="cstat-no" title="statement not covered" >  if ((value &lt; 0x4000) || (value &gt;= 0x01000000)) {</span>
+<span class="cstat-no" title="statement not covered" >    this._log.fatal('Received invalid value for max frame size: ' + value);</span>
+<span class="cstat-no" title="statement not covered" >    this.emit('error');</span>
+  }
+};
+&nbsp;
+// Changing one or more settings value and sending out a SETTINGS frame
+Connection.prototype.set = <span class="fstat-no" title="function not covered" >function set(settings, callback) {</span>
+  // * Calling the callback and emitting event when the change is acknowledges
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+<span class="cstat-no" title="statement not covered" >  this._settingsAckCallbacks.push(<span class="fstat-no" title="function not covered" >function() {</span></span>
+<span class="cstat-no" title="statement not covered" >    for (var name in settings) {</span>
+<span class="cstat-no" title="statement not covered" >      self.emit('ACKNOWLEDGED_' + name, settings[name]);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if (callback) {</span>
+<span class="cstat-no" title="statement not covered" >      callback();</span>
+    }
+  });
+&nbsp;
+  // * Sending out the SETTINGS frame
+<span class="cstat-no" title="statement not covered" >  this.push({</span>
+    type: 'SETTINGS',
+    flags: { ACK: false },
+    stream: 0,
+    settings: settings
+  });
+<span class="cstat-no" title="statement not covered" >  for (var name in settings) {</span>
+<span class="cstat-no" title="statement not covered" >    this.emit('SENDING_' + name, settings[name]);</span>
+  }
+};
+&nbsp;
+// Lifecycle management
+// --------------------
+&nbsp;
+// The main responsibilities of lifecycle management code:
+//
+// * keeping the connection alive by
+//   * sending PINGs when the connection is idle
+//   * answering PINGs
+// * ending the connection
+&nbsp;
+Connection.prototype._initializeLifecycleManagement = <span class="fstat-no" title="function not covered" >function _initializeLifecycleManagement() {</span>
+<span class="cstat-no" title="statement not covered" >  this._pings = {};</span>
+<span class="cstat-no" title="statement not covered" >  this.on('PING', this._receivePing);</span>
+<span class="cstat-no" title="statement not covered" >  this.on('GOAWAY', this._receiveGoaway);</span>
+<span class="cstat-no" title="statement not covered" >  this._closed = false;</span>
+};
+&nbsp;
+// Generating a string of length 16 with random hexadecimal digits
+Connection.prototype._generatePingId = <span class="fstat-no" title="function not covered" >function _generatePingId() {</span>
+<span class="cstat-no" title="statement not covered" >  do {</span>
+<span class="cstat-no" title="statement not covered" >    var id = '';</span>
+<span class="cstat-no" title="statement not covered" >    for (var i = 0; i &lt; 16; i++) {</span>
+<span class="cstat-no" title="statement not covered" >      id += Math.floor(Math.random()*16).toString(16);</span>
+    }
+  } while(id in this._pings);
+<span class="cstat-no" title="statement not covered" >  return id;</span>
+};
+&nbsp;
+// Sending a ping and calling `callback` when the answer arrives
+Connection.prototype.ping = <span class="fstat-no" title="function not covered" >function ping(callback) {</span>
+<span class="cstat-no" title="statement not covered" >  var id = this._generatePingId();</span>
+<span class="cstat-no" title="statement not covered" >  var data = new Buffer(id, 'hex');</span>
+<span class="cstat-no" title="statement not covered" >  this._pings[id] = callback;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this._log.debug({ data: data }, 'Sending PING.');</span>
+<span class="cstat-no" title="statement not covered" >  this.push({</span>
+    type: 'PING',
+    flags: {
+      ACK: false
+    },
+    stream: 0,
+    data: data
+  });
+};
+&nbsp;
+// Answering pings
+Connection.prototype._receivePing = <span class="fstat-no" title="function not covered" >function _receivePing(frame) {</span>
+<span class="cstat-no" title="statement not covered" >  if (frame.flags.ACK) {</span>
+<span class="cstat-no" title="statement not covered" >    var id = frame.data.toString('hex');</span>
+<span class="cstat-no" title="statement not covered" >    if (id in this._pings) {</span>
+<span class="cstat-no" title="statement not covered" >      this._log.debug({ data: frame.data }, 'Receiving answer for a PING.');</span>
+<span class="cstat-no" title="statement not covered" >      var callback = this._pings[id];</span>
+<span class="cstat-no" title="statement not covered" >      if (callback) {</span>
+<span class="cstat-no" title="statement not covered" >        callback();</span>
+      }
+<span class="cstat-no" title="statement not covered" >      delete this._pings[id];</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >      this._log.warn({ data: frame.data }, 'Unsolicited PING answer.');</span>
+    }
+&nbsp;
+  } else {
+<span class="cstat-no" title="statement not covered" >    this._log.debug({ data: frame.data }, 'Answering PING.');</span>
+<span class="cstat-no" title="statement not covered" >    this.push({</span>
+      type: 'PING',
+      flags: {
+        ACK: true
+      },
+      stream: 0,
+      data: frame.data
+    });
+  }
+};
+&nbsp;
+// Terminating the connection
+Connection.prototype.close = <span class="fstat-no" title="function not covered" >function close(error) {</span>
+<span class="cstat-no" title="statement not covered" >  if (this._closed) {</span>
+<span class="cstat-no" title="statement not covered" >    this._log.warn('Trying to close an already closed connection');</span>
+<span class="cstat-no" title="statement not covered" >    return;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this._log.debug({ error: error }, 'Closing the connection');</span>
+<span class="cstat-no" title="statement not covered" >  this.push({</span>
+    type: 'GOAWAY',
+    flags: {},
+    stream: 0,
+    last_stream: this._lastIncomingStream,
+    error: error || 'NO_ERROR'
+  });
+<span class="cstat-no" title="statement not covered" >  this.push(null);</span>
+<span class="cstat-no" title="statement not covered" >  this._closed = true;</span>
+};
+&nbsp;
+Connection.prototype._receiveGoaway = <span class="fstat-no" title="function not covered" >function _receiveGoaway(frame) {</span>
+<span class="cstat-no" title="statement not covered" >  this._log.debug({ error: frame.error }, 'Other end closed the connection');</span>
+<span class="cstat-no" title="statement not covered" >  this.push(null);</span>
+<span class="cstat-no" title="statement not covered" >  this._closed = true;</span>
+<span class="cstat-no" title="statement not covered" >  if (frame.error !== 'NO_ERROR') {</span>
+<span class="cstat-no" title="statement not covered" >    this.emit('peerError', frame.error);</span>
+  }
+};
+&nbsp;
+// Flow control
+// ------------
+&nbsp;
+Connection.prototype._initializeFlowControl = <span class="fstat-no" title="function not covered" >function _initializeFlowControl() {</span>
+  // Handling of initial window size of individual streams.
+<span class="cstat-no" title="statement not covered" >  this._initialStreamWindowSize = INITIAL_STREAM_WINDOW_SIZE;</span>
+<span class="cstat-no" title="statement not covered" >  this.on('new_stream', <span class="fstat-no" title="function not covered" >function(stream) {</span></span>
+<span class="cstat-no" title="statement not covered" >    stream.upstream.setInitialWindow(this._initialStreamWindowSize);</span>
+  });
+<span class="cstat-no" title="statement not covered" >  this.on('RECEIVING_SETTINGS_INITIAL_WINDOW_SIZE', this._setInitialStreamWindowSize);</span>
+<span class="cstat-no" title="statement not covered" >  this._streamIds[0].upstream.setInitialWindow = <span class="fstat-no" title="function not covered" >function noop() {</span>};</span>
+};
+&nbsp;
+// The initial connection flow control window is 65535 bytes.
+var INITIAL_STREAM_WINDOW_SIZE = 65535;
+&nbsp;
+// A SETTINGS frame can alter the initial flow control window size for all current streams. When the
+// value of SETTINGS_INITIAL_WINDOW_SIZE changes, a receiver MUST adjust the window size of all
+// stream by calling the `setInitialStreamWindowSize` method. The window size has to be modified by
+// the difference between the new value and the old value.
+Connection.prototype._setInitialStreamWindowSize = <span class="fstat-no" title="function not covered" >function _setInitialStreamWindowSize(size) {</span>
+<span class="cstat-no" title="statement not covered" >  if ((this._initialStreamWindowSize === Infinity) &amp;&amp; (size !== Infinity)) {</span>
+<span class="cstat-no" title="statement not covered" >    this._log.error('Trying to manipulate initial flow control window size after flow control was turned off.');</span>
+<span class="cstat-no" title="statement not covered" >    this.emit('error', 'FLOW_CONTROL_ERROR');</span>
+  } else {
+<span class="cstat-no" title="statement not covered" >    this._log.debug({ size: size }, 'Changing stream initial window size.');</span>
+<span class="cstat-no" title="statement not covered" >    this._initialStreamWindowSize = size;</span>
+<span class="cstat-no" title="statement not covered" >    this._streamIds.forEach(<span class="fstat-no" title="function not covered" >function(stream) {</span></span>
+<span class="cstat-no" title="statement not covered" >      stream.upstream.setInitialWindow(size);</span>
+    });
+  }
+};
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 23:27:51 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
