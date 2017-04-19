@@ -1,5 +1,7 @@
-<html lang="en"><head>
-    <title>Code coverage report for node-npmtest-http2/http2/lib/protocol/stream.js</title>
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-http2/node_modules/http2/lib/protocol/stream.js</title>
     <meta charset="utf-8">
     <style>
         body, html {
@@ -192,7 +194,7 @@
     <h1 style="font-weight: bold;">
         <a href="https://github.com/npmtest/node-npmtest-http2">npmtest-http2 (v0.0.1)</a>
     </h1>
-    <h1>Code coverage report for <span class="entity">node-npmtest-http2/http2/lib/protocol/stream.js</span></h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-http2/node_modules/http2/lib/protocol/stream.js</span></h1>
     <h2>
         
         Statements: <span class="metric">14.29% <small>(33 / 231)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
@@ -208,11 +210,11 @@
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
-    <div class="path"><a href="../../../../index.html">All files</a> » <a href="index.html">node-npmtest-http2/http2/lib/protocol/</a> » stream.js</div>
+    <div class="path"><a href="../../../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-http2/node_modules/http2/lib/protocol/</a> &#187; stream.js</div>
 </div>
 <div class="body">
 <pre><table class="coverage">
-<tbody><tr><td class="line-count">1
+<tr><td class="line-count">1
 2
 3
 4
@@ -1580,22 +1582,22 @@ exports.Stream = Stream;
 // -----------
 &nbsp;
 // The main aspects of managing the stream are:
-<span class="fstat-no" title="function not covered">function Stream(log, connection) {</span>
-<span class="cstat-no" title="statement not covered">  Duplex.call(this);</span>
+<span class="fstat-no" title="function not covered" >function Stream(log, connection) {</span>
+<span class="cstat-no" title="statement not covered" >  Duplex.call(this);</span>
 &nbsp;
   // * logging
-<span class="cstat-no" title="statement not covered">  this._log = log.child({ component: 'stream', s: this });</span>
+<span class="cstat-no" title="statement not covered" >  this._log = log.child({ component: 'stream', s: this });</span>
 &nbsp;
   // * receiving and sending stream management commands
-<span class="cstat-no" title="statement not covered">  this._initializeManagement();</span>
+<span class="cstat-no" title="statement not covered" >  this._initializeManagement();</span>
 &nbsp;
   // * sending and receiving frames to/from the upstream connection
-<span class="cstat-no" title="statement not covered">  this._initializeDataFlow();</span>
+<span class="cstat-no" title="statement not covered" >  this._initializeDataFlow();</span>
 &nbsp;
   // * maintaining the state of the stream (idle, open, closed, etc.) and error detection
-<span class="cstat-no" title="statement not covered">  this._initializeState();</span>
+<span class="cstat-no" title="statement not covered" >  this._initializeState();</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered">  this.connection = connection;</span>
+<span class="cstat-no" title="statement not covered" >  this.connection = connection;</span>
 }
 &nbsp;
 Stream.prototype = Object.create(Duplex.prototype, { constructor: { value: Stream } });
@@ -1608,31 +1610,31 @@ var DEFAULT_PRIORITY = Math.pow(2, 30);
 var MAX_PRIORITY = Math.pow(2, 31) - 1;
 &nbsp;
 // PUSH_PROMISE and HEADERS are forwarded to the user through events.
-Stream.prototype._initializeManagement = <span class="fstat-no" title="function not covered">function _initializeManagement() {</span>
-<span class="cstat-no" title="statement not covered">  this._resetSent = false;</span>
-<span class="cstat-no" title="statement not covered">  this._priority = DEFAULT_PRIORITY;</span>
-<span class="cstat-no" title="statement not covered">  this._letPeerPrioritize = true;</span>
+Stream.prototype._initializeManagement = <span class="fstat-no" title="function not covered" >function _initializeManagement() {</span>
+<span class="cstat-no" title="statement not covered" >  this._resetSent = false;</span>
+<span class="cstat-no" title="statement not covered" >  this._priority = DEFAULT_PRIORITY;</span>
+<span class="cstat-no" title="statement not covered" >  this._letPeerPrioritize = true;</span>
 };
 &nbsp;
-Stream.prototype.promise = <span class="fstat-no" title="function not covered">function promise(headers) {</span>
-<span class="cstat-no" title="statement not covered">  var stream = new Stream(this._log, this.connection);</span>
-<span class="cstat-no" title="statement not covered">  stream._priority = Math.min(this._priority + 1, MAX_PRIORITY);</span>
-<span class="cstat-no" title="statement not covered">  this._pushUpstream({</span>
+Stream.prototype.promise = <span class="fstat-no" title="function not covered" >function promise(headers) {</span>
+<span class="cstat-no" title="statement not covered" >  var stream = new Stream(this._log, this.connection);</span>
+<span class="cstat-no" title="statement not covered" >  stream._priority = Math.min(this._priority + 1, MAX_PRIORITY);</span>
+<span class="cstat-no" title="statement not covered" >  this._pushUpstream({</span>
     type: 'PUSH_PROMISE',
     flags: {},
     stream: this.id,
     promised_stream: stream,
     headers: headers
   });
-<span class="cstat-no" title="statement not covered">  return stream;</span>
+<span class="cstat-no" title="statement not covered" >  return stream;</span>
 };
 &nbsp;
-Stream.prototype._onPromise = <span class="fstat-no" title="function not covered">function _onPromise(frame) {</span>
-<span class="cstat-no" title="statement not covered">  this.emit('promise', frame.promised_stream, frame.headers);</span>
+Stream.prototype._onPromise = <span class="fstat-no" title="function not covered" >function _onPromise(frame) {</span>
+<span class="cstat-no" title="statement not covered" >  this.emit('promise', frame.promised_stream, frame.headers);</span>
 };
 &nbsp;
-Stream.prototype.headers = <span class="fstat-no" title="function not covered">function headers(headers) {</span>
-<span class="cstat-no" title="statement not covered">  this._pushUpstream({</span>
+Stream.prototype.headers = <span class="fstat-no" title="function not covered" >function headers(headers) {</span>
+<span class="cstat-no" title="statement not covered" >  this._pushUpstream({</span>
     type: 'HEADERS',
     flags: {},
     stream: this.id,
@@ -1640,23 +1642,23 @@ Stream.prototype.headers = <span class="fstat-no" title="function not covered">f
   });
 };
 &nbsp;
-Stream.prototype._onHeaders = <span class="fstat-no" title="function not covered">function _onHeaders(frame) {</span>
-<span class="cstat-no" title="statement not covered">  if (frame.priority !== undefined) {</span>
-<span class="cstat-no" title="statement not covered">    this.priority(frame.priority, true);</span>
+Stream.prototype._onHeaders = <span class="fstat-no" title="function not covered" >function _onHeaders(frame) {</span>
+<span class="cstat-no" title="statement not covered" >  if (frame.priority !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >    this.priority(frame.priority, true);</span>
   }
-<span class="cstat-no" title="statement not covered">  this.emit('headers', frame.headers);</span>
+<span class="cstat-no" title="statement not covered" >  this.emit('headers', frame.headers);</span>
 };
 &nbsp;
-Stream.prototype.priority = <span class="fstat-no" title="function not covered">function priority(priority, peer) {</span>
-<span class="cstat-no" title="statement not covered">  if ((peer &amp;&amp; this._letPeerPrioritize) || !peer) {</span>
-<span class="cstat-no" title="statement not covered">    if (!peer) {</span>
-<span class="cstat-no" title="statement not covered">      this._letPeerPrioritize = false;</span>
+Stream.prototype.priority = <span class="fstat-no" title="function not covered" >function priority(priority, peer) {</span>
+<span class="cstat-no" title="statement not covered" >  if ((peer &amp;&amp; this._letPeerPrioritize) || !peer) {</span>
+<span class="cstat-no" title="statement not covered" >    if (!peer) {</span>
+<span class="cstat-no" title="statement not covered" >      this._letPeerPrioritize = false;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered">      var lastFrame = this.upstream.getLastQueuedFrame();</span>
-<span class="cstat-no" title="statement not covered">      if (lastFrame &amp;&amp; ((lastFrame.type === 'HEADERS') || (lastFrame.type === 'PRIORITY'))) {</span>
-<span class="cstat-no" title="statement not covered">        lastFrame.priority = priority;</span>
+<span class="cstat-no" title="statement not covered" >      var lastFrame = this.upstream.getLastQueuedFrame();</span>
+<span class="cstat-no" title="statement not covered" >      if (lastFrame &amp;&amp; ((lastFrame.type === 'HEADERS') || (lastFrame.type === 'PRIORITY'))) {</span>
+<span class="cstat-no" title="statement not covered" >        lastFrame.priority = priority;</span>
       } else {
-<span class="cstat-no" title="statement not covered">        this._pushUpstream({</span>
+<span class="cstat-no" title="statement not covered" >        this._pushUpstream({</span>
           type: 'PRIORITY',
           flags: {},
           stream: this.id,
@@ -1665,22 +1667,22 @@ Stream.prototype.priority = <span class="fstat-no" title="function not covered">
       }
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered">    this._log.debug({ priority: priority }, 'Changing priority');</span>
-<span class="cstat-no" title="statement not covered">    this.emit('priority', priority);</span>
-<span class="cstat-no" title="statement not covered">    this._priority = priority;</span>
+<span class="cstat-no" title="statement not covered" >    this._log.debug({ priority: priority }, 'Changing priority');</span>
+<span class="cstat-no" title="statement not covered" >    this.emit('priority', priority);</span>
+<span class="cstat-no" title="statement not covered" >    this._priority = priority;</span>
   }
 };
 &nbsp;
-Stream.prototype._onPriority = <span class="fstat-no" title="function not covered">function _onPriority(frame) {</span>
-<span class="cstat-no" title="statement not covered">  this.priority(frame.priority, true);</span>
+Stream.prototype._onPriority = <span class="fstat-no" title="function not covered" >function _onPriority(frame) {</span>
+<span class="cstat-no" title="statement not covered" >  this.priority(frame.priority, true);</span>
 };
 &nbsp;
 // Resetting the stream. Normally, an endpoint SHOULD NOT send more than one RST_STREAM frame for
 // any stream.
-Stream.prototype.reset = <span class="fstat-no" title="function not covered">function reset(error) {</span>
-<span class="cstat-no" title="statement not covered">  if (!this._resetSent) {</span>
-<span class="cstat-no" title="statement not covered">    this._resetSent = true;</span>
-<span class="cstat-no" title="statement not covered">    this._pushUpstream({</span>
+Stream.prototype.reset = <span class="fstat-no" title="function not covered" >function reset(error) {</span>
+<span class="cstat-no" title="statement not covered" >  if (!this._resetSent) {</span>
+<span class="cstat-no" title="statement not covered" >    this._resetSent = true;</span>
+<span class="cstat-no" title="statement not covered" >    this._pushUpstream({</span>
       type: 'RST_STREAM',
       flags: {},
       stream: this.id,
@@ -1690,14 +1692,14 @@ Stream.prototype.reset = <span class="fstat-no" title="function not covered">fun
 };
 &nbsp;
 // Specify an alternate service for the origin of this stream
-Stream.prototype.altsvc = <span class="fstat-no" title="function not covered">function altsvc(host, port, protocolID, maxAge, origin) {</span>
-<span class="cstat-no" title="statement not covered">    var stream;</span>
-<span class="cstat-no" title="statement not covered">    if (origin) {</span>
-<span class="cstat-no" title="statement not covered">        stream = 0;</span>
+Stream.prototype.altsvc = <span class="fstat-no" title="function not covered" >function altsvc(host, port, protocolID, maxAge, origin) {</span>
+<span class="cstat-no" title="statement not covered" >    var stream;</span>
+<span class="cstat-no" title="statement not covered" >    if (origin) {</span>
+<span class="cstat-no" title="statement not covered" >        stream = 0;</span>
     } else {
-<span class="cstat-no" title="statement not covered">        stream = this.id;</span>
+<span class="cstat-no" title="statement not covered" >        stream = this.id;</span>
     }
-<span class="cstat-no" title="statement not covered">    this._pushUpstream({</span>
+<span class="cstat-no" title="statement not covered" >    this._pushUpstream({</span>
         type: 'ALTSVC',
         flags: {},
         stream: stream,
@@ -1744,101 +1746,101 @@ Stream.prototype.altsvc = <span class="fstat-no" title="function not covered">fu
 &nbsp;
 var Flow = require('./flow').Flow;
 &nbsp;
-Stream.prototype._initializeDataFlow = <span class="fstat-no" title="function not covered">function _initializeDataFlow() {</span>
-<span class="cstat-no" title="statement not covered">  this.id = undefined;</span>
+Stream.prototype._initializeDataFlow = <span class="fstat-no" title="function not covered" >function _initializeDataFlow() {</span>
+<span class="cstat-no" title="statement not covered" >  this.id = undefined;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered">  this._ended = false;</span>
+<span class="cstat-no" title="statement not covered" >  this._ended = false;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered">  this.upstream = new Flow();</span>
-<span class="cstat-no" title="statement not covered">  this.upstream._log = this._log;</span>
-<span class="cstat-no" title="statement not covered">  this.upstream._send = this._send.bind(this);</span>
-<span class="cstat-no" title="statement not covered">  this.upstream._receive = this._receive.bind(this);</span>
-<span class="cstat-no" title="statement not covered">  this.upstream.write = this._writeUpstream.bind(this);</span>
-<span class="cstat-no" title="statement not covered">  this.upstream.on('error', this.emit.bind(this, 'error'));</span>
+<span class="cstat-no" title="statement not covered" >  this.upstream = new Flow();</span>
+<span class="cstat-no" title="statement not covered" >  this.upstream._log = this._log;</span>
+<span class="cstat-no" title="statement not covered" >  this.upstream._send = this._send.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >  this.upstream._receive = this._receive.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >  this.upstream.write = this._writeUpstream.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >  this.upstream.on('error', this.emit.bind(this, 'error'));</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered">  this.on('finish', this._finishing);</span>
+<span class="cstat-no" title="statement not covered" >  this.on('finish', this._finishing);</span>
 };
 &nbsp;
-Stream.prototype._pushUpstream = <span class="fstat-no" title="function not covered">function _pushUpstream(frame) {</span>
-<span class="cstat-no" title="statement not covered">  this.upstream.push(frame);</span>
-<span class="cstat-no" title="statement not covered">  this._transition(true, frame);</span>
+Stream.prototype._pushUpstream = <span class="fstat-no" title="function not covered" >function _pushUpstream(frame) {</span>
+<span class="cstat-no" title="statement not covered" >  this.upstream.push(frame);</span>
+<span class="cstat-no" title="statement not covered" >  this._transition(true, frame);</span>
 };
 &nbsp;
 // Overriding the upstream's `write` allows us to act immediately instead of waiting for the input
 // queue to empty. This is important in case of control frames.
-Stream.prototype._writeUpstream = <span class="fstat-no" title="function not covered">function _writeUpstream(frame) {</span>
-<span class="cstat-no" title="statement not covered">  this._log.debug({ frame: frame }, 'Receiving frame');</span>
+Stream.prototype._writeUpstream = <span class="fstat-no" title="function not covered" >function _writeUpstream(frame) {</span>
+<span class="cstat-no" title="statement not covered" >  this._log.debug({ frame: frame }, 'Receiving frame');</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered">  var moreNeeded = Flow.prototype.write.call(this.upstream, frame);</span>
+<span class="cstat-no" title="statement not covered" >  var moreNeeded = Flow.prototype.write.call(this.upstream, frame);</span>
 &nbsp;
   // * Transition to a new state if that's the effect of receiving the frame
-<span class="cstat-no" title="statement not covered">  this._transition(false, frame);</span>
+<span class="cstat-no" title="statement not covered" >  this._transition(false, frame);</span>
 &nbsp;
   // * If it's a control frame. Call the appropriate handler method.
-<span class="cstat-no" title="statement not covered">  if (frame.type === 'HEADERS') {</span>
-<span class="cstat-no" title="statement not covered">    if (this._processedHeaders &amp;&amp; !frame.flags['END_STREAM']) {</span>
-<span class="cstat-no" title="statement not covered">      this.emit('error', 'PROTOCOL_ERROR');</span>
+<span class="cstat-no" title="statement not covered" >  if (frame.type === 'HEADERS') {</span>
+<span class="cstat-no" title="statement not covered" >    if (this._processedHeaders &amp;&amp; !frame.flags['END_STREAM']) {</span>
+<span class="cstat-no" title="statement not covered" >      this.emit('error', 'PROTOCOL_ERROR');</span>
     }
-<span class="cstat-no" title="statement not covered">    this._processedHeaders = true;</span>
-<span class="cstat-no" title="statement not covered">    this._onHeaders(frame);</span>
-  } else <span class="cstat-no" title="statement not covered">if (frame.type === 'PUSH_PROMISE') {</span>
-<span class="cstat-no" title="statement not covered">    this._onPromise(frame);</span>
-  } else <span class="cstat-no" title="statement not covered">if (frame.type === 'PRIORITY') {</span>
-<span class="cstat-no" title="statement not covered">    this._onPriority(frame);</span>
-  } else <span class="cstat-no" title="statement not covered">if (frame.type === 'ALTSVC') {</span>
+<span class="cstat-no" title="statement not covered" >    this._processedHeaders = true;</span>
+<span class="cstat-no" title="statement not covered" >    this._onHeaders(frame);</span>
+  } else <span class="cstat-no" title="statement not covered" >if (frame.type === 'PUSH_PROMISE') {</span>
+<span class="cstat-no" title="statement not covered" >    this._onPromise(frame);</span>
+  } else <span class="cstat-no" title="statement not covered" >if (frame.type === 'PRIORITY') {</span>
+<span class="cstat-no" title="statement not covered" >    this._onPriority(frame);</span>
+  } else <span class="cstat-no" title="statement not covered" >if (frame.type === 'ALTSVC') {</span>
     // TODO
-  } else <span class="cstat-no" title="statement not covered">if (frame.type === 'BLOCKED') {</span>
+  } else <span class="cstat-no" title="statement not covered" >if (frame.type === 'BLOCKED') {</span>
     // TODO
   }
 &nbsp;
   // * If it's an invalid stream level frame, emit error
-  else <span class="cstat-no" title="statement not covered">if ((frame.type !== 'DATA') &amp;&amp;</span>
+  else <span class="cstat-no" title="statement not covered" >if ((frame.type !== 'DATA') &amp;&amp;</span>
            (frame.type !== 'WINDOW_UPDATE') &amp;&amp;
            (frame.type !== 'RST_STREAM')) {
-<span class="cstat-no" title="statement not covered">    this._log.error({ frame: frame }, 'Invalid stream level frame');</span>
-<span class="cstat-no" title="statement not covered">    this.emit('error', 'PROTOCOL_ERROR');</span>
+<span class="cstat-no" title="statement not covered" >    this._log.error({ frame: frame }, 'Invalid stream level frame');</span>
+<span class="cstat-no" title="statement not covered" >    this.emit('error', 'PROTOCOL_ERROR');</span>
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered">  return moreNeeded;</span>
+<span class="cstat-no" title="statement not covered" >  return moreNeeded;</span>
 };
 &nbsp;
 // The `_receive` method (= `upstream._receive`) gets called when there's an incoming frame.
-Stream.prototype._receive = <span class="fstat-no" title="function not covered">function _receive(frame, ready) {</span>
+Stream.prototype._receive = <span class="fstat-no" title="function not covered" >function _receive(frame, ready) {</span>
   // * If it's a DATA frame, then push the payload into the output buffer on the other side.
   //   Call ready when the other side is ready to receive more.
-<span class="cstat-no" title="statement not covered">  if (!this._ended &amp;&amp; (frame.type === 'DATA')) {</span>
-<span class="cstat-no" title="statement not covered">    var moreNeeded = this.push(frame.data);</span>
-<span class="cstat-no" title="statement not covered">    if (!moreNeeded) {</span>
-<span class="cstat-no" title="statement not covered">      this._receiveMore = ready;</span>
+<span class="cstat-no" title="statement not covered" >  if (!this._ended &amp;&amp; (frame.type === 'DATA')) {</span>
+<span class="cstat-no" title="statement not covered" >    var moreNeeded = this.push(frame.data);</span>
+<span class="cstat-no" title="statement not covered" >    if (!moreNeeded) {</span>
+<span class="cstat-no" title="statement not covered" >      this._receiveMore = ready;</span>
     }
   }
 &nbsp;
   // * Any frame may signal the end of the stream with the END_STREAM flag
-<span class="cstat-no" title="statement not covered">  if (!this._ended &amp;&amp; (frame.flags.END_STREAM || (frame.type === 'RST_STREAM'))) {</span>
-<span class="cstat-no" title="statement not covered">    this.push(null);</span>
-<span class="cstat-no" title="statement not covered">    this._ended = true;</span>
+<span class="cstat-no" title="statement not covered" >  if (!this._ended &amp;&amp; (frame.flags.END_STREAM || (frame.type === 'RST_STREAM'))) {</span>
+<span class="cstat-no" title="statement not covered" >    this.push(null);</span>
+<span class="cstat-no" title="statement not covered" >    this._ended = true;</span>
   }
 &nbsp;
   // * Postpone calling `ready` if `push()` returned a falsy value
-<span class="cstat-no" title="statement not covered">  if (this._receiveMore !== ready) {</span>
-<span class="cstat-no" title="statement not covered">    ready();</span>
+<span class="cstat-no" title="statement not covered" >  if (this._receiveMore !== ready) {</span>
+<span class="cstat-no" title="statement not covered" >    ready();</span>
   }
 };
 &nbsp;
 // The `_read` method is called when the user side is ready to receive more data. If there's a
 // pending write on the upstream, then call its pending ready callback to receive more frames.
-Stream.prototype._read = <span class="fstat-no" title="function not covered">function _read() {</span>
-<span class="cstat-no" title="statement not covered">  if (this._receiveMore) {</span>
-<span class="cstat-no" title="statement not covered">    var receiveMore = this._receiveMore;</span>
-<span class="cstat-no" title="statement not covered">    delete this._receiveMore;</span>
-<span class="cstat-no" title="statement not covered">    receiveMore();</span>
+Stream.prototype._read = <span class="fstat-no" title="function not covered" >function _read() {</span>
+<span class="cstat-no" title="statement not covered" >  if (this._receiveMore) {</span>
+<span class="cstat-no" title="statement not covered" >    var receiveMore = this._receiveMore;</span>
+<span class="cstat-no" title="statement not covered" >    delete this._receiveMore;</span>
+<span class="cstat-no" title="statement not covered" >    receiveMore();</span>
   }
 };
 &nbsp;
 // The `write` method gets called when there's a write request from the user.
-Stream.prototype._write = <span class="fstat-no" title="function not covered">function _write(buffer, encoding, ready) {</span>
+Stream.prototype._write = <span class="fstat-no" title="function not covered" >function _write(buffer, encoding, ready) {</span>
   // * Chunking is done by the upstream Flow.
-<span class="cstat-no" title="statement not covered">  var moreNeeded = this._pushUpstream({</span>
+<span class="cstat-no" title="statement not covered" >  var moreNeeded = this._pushUpstream({</span>
     type: 'DATA',
     flags: {},
     stream: this.id,
@@ -1846,21 +1848,21 @@ Stream.prototype._write = <span class="fstat-no" title="function not covered">fu
   });
 &nbsp;
   // * Call ready when upstream is ready to receive more frames.
-<span class="cstat-no" title="statement not covered">  if (moreNeeded) {</span>
-<span class="cstat-no" title="statement not covered">    ready();</span>
+<span class="cstat-no" title="statement not covered" >  if (moreNeeded) {</span>
+<span class="cstat-no" title="statement not covered" >    ready();</span>
   } else {
-<span class="cstat-no" title="statement not covered">    this._sendMore = ready;</span>
+<span class="cstat-no" title="statement not covered" >    this._sendMore = ready;</span>
   }
 };
 &nbsp;
 // The `_send` (= `upstream._send`) method is called when upstream is ready to receive more frames.
 // If there's a pending write on the user side, then call its pending ready callback to receive more
 // writes.
-Stream.prototype._send = <span class="fstat-no" title="function not covered">function _send() {</span>
-<span class="cstat-no" title="statement not covered">  if (this._sendMore) {</span>
-<span class="cstat-no" title="statement not covered">    var sendMore = this._sendMore;</span>
-<span class="cstat-no" title="statement not covered">    delete this._sendMore;</span>
-<span class="cstat-no" title="statement not covered">    sendMore();</span>
+Stream.prototype._send = <span class="fstat-no" title="function not covered" >function _send() {</span>
+<span class="cstat-no" title="statement not covered" >  if (this._sendMore) {</span>
+<span class="cstat-no" title="statement not covered" >    var sendMore = this._sendMore;</span>
+<span class="cstat-no" title="statement not covered" >    delete this._sendMore;</span>
+<span class="cstat-no" title="statement not covered" >    sendMore();</span>
   }
 };
 &nbsp;
@@ -1869,20 +1871,20 @@ Stream.prototype._send = <span class="fstat-no" title="function not covered">fun
 // then we create a 0 length DATA frame. We could do this all the time, but putting the flag on an
 // existing frame is a nice optimization.
 var emptyBuffer = new Buffer(0);
-Stream.prototype._finishing = <span class="fstat-no" title="function not covered">function _finishing() {</span>
-<span class="cstat-no" title="statement not covered">  var endFrame = {</span>
+Stream.prototype._finishing = <span class="fstat-no" title="function not covered" >function _finishing() {</span>
+<span class="cstat-no" title="statement not covered" >  var endFrame = {</span>
     type: 'DATA',
     flags: { END_STREAM: true },
     stream: this.id,
     data: emptyBuffer
   };
-<span class="cstat-no" title="statement not covered">  var lastFrame = this.upstream.getLastQueuedFrame();</span>
-<span class="cstat-no" title="statement not covered">  if (lastFrame &amp;&amp; ((lastFrame.type === 'DATA') || (lastFrame.type === 'HEADERS'))) {</span>
-<span class="cstat-no" title="statement not covered">    this._log.debug({ frame: lastFrame }, 'Marking last frame with END_STREAM flag.');</span>
-<span class="cstat-no" title="statement not covered">    lastFrame.flags.END_STREAM = true;</span>
-<span class="cstat-no" title="statement not covered">    this._transition(true, endFrame);</span>
+<span class="cstat-no" title="statement not covered" >  var lastFrame = this.upstream.getLastQueuedFrame();</span>
+<span class="cstat-no" title="statement not covered" >  if (lastFrame &amp;&amp; ((lastFrame.type === 'DATA') || (lastFrame.type === 'HEADERS'))) {</span>
+<span class="cstat-no" title="statement not covered" >    this._log.debug({ frame: lastFrame }, 'Marking last frame with END_STREAM flag.');</span>
+<span class="cstat-no" title="statement not covered" >    lastFrame.flags.END_STREAM = true;</span>
+<span class="cstat-no" title="statement not covered" >    this._transition(true, endFrame);</span>
   } else {
-<span class="cstat-no" title="statement not covered">    this._pushUpstream(endFrame);</span>
+<span class="cstat-no" title="statement not covered" >    this._pushUpstream(endFrame);</span>
   }
 };
 &nbsp;
@@ -1916,73 +1918,73 @@ Stream.prototype._finishing = <span class="fstat-no" title="function not covered
 //                           +--------+
 &nbsp;
 // Streams begin in the IDLE state and transitions happen when there's an incoming or outgoing frame
-Stream.prototype._initializeState = <span class="fstat-no" title="function not covered">function _initializeState() {</span>
-<span class="cstat-no" title="statement not covered">  this.state = 'IDLE';</span>
-<span class="cstat-no" title="statement not covered">  this._initiated = undefined;</span>
-<span class="cstat-no" title="statement not covered">  this._closedByUs = undefined;</span>
-<span class="cstat-no" title="statement not covered">  this._closedWithRst = undefined;</span>
-<span class="cstat-no" title="statement not covered">  this._processedHeaders = false;</span>
+Stream.prototype._initializeState = <span class="fstat-no" title="function not covered" >function _initializeState() {</span>
+<span class="cstat-no" title="statement not covered" >  this.state = 'IDLE';</span>
+<span class="cstat-no" title="statement not covered" >  this._initiated = undefined;</span>
+<span class="cstat-no" title="statement not covered" >  this._closedByUs = undefined;</span>
+<span class="cstat-no" title="statement not covered" >  this._closedWithRst = undefined;</span>
+<span class="cstat-no" title="statement not covered" >  this._processedHeaders = false;</span>
 };
 &nbsp;
 // Only `_setState` should change `this.state` directly. It also logs the state change and notifies
 // interested parties using the 'state' event.
-Stream.prototype._setState = <span class="fstat-no" title="function not covered">function transition(state) {</span>
-<span class="cstat-no" title="statement not covered">  assert(this.state !== state);</span>
-<span class="cstat-no" title="statement not covered">  this._log.debug({ from: this.state, to: state }, 'State transition');</span>
-<span class="cstat-no" title="statement not covered">  this.state = state;</span>
-<span class="cstat-no" title="statement not covered">  this.emit('state', state);</span>
+Stream.prototype._setState = <span class="fstat-no" title="function not covered" >function transition(state) {</span>
+<span class="cstat-no" title="statement not covered" >  assert(this.state !== state);</span>
+<span class="cstat-no" title="statement not covered" >  this._log.debug({ from: this.state, to: state }, 'State transition');</span>
+<span class="cstat-no" title="statement not covered" >  this.state = state;</span>
+<span class="cstat-no" title="statement not covered" >  this.emit('state', state);</span>
 };
 &nbsp;
 // A state is 'active' if the stream in that state counts towards the concurrency limit. Streams
 // that are in the "open" state, or either of the "half closed" states count toward this limit.
-<span class="fstat-no" title="function not covered">function activeState(state) {</span>
-<span class="cstat-no" title="statement not covered">  return ((state === 'HALF_CLOSED_LOCAL') || (state === 'HALF_CLOSED_REMOTE') || (state === 'OPEN'));</span>
+<span class="fstat-no" title="function not covered" >function activeState(state) {</span>
+<span class="cstat-no" title="statement not covered" >  return ((state === 'HALF_CLOSED_LOCAL') || (state === 'HALF_CLOSED_REMOTE') || (state === 'OPEN'));</span>
 }
 &nbsp;
 // `_transition` is called every time there's an incoming or outgoing frame. It manages state
 // transitions, and detects stream errors. A stream error is always caused by a frame that is not
 // allowed in the current state.
-Stream.prototype._transition = <span class="fstat-no" title="function not covered">function transition(sending, frame) {</span>
-<span class="cstat-no" title="statement not covered">  var receiving = !sending;</span>
-<span class="cstat-no" title="statement not covered">  var connectionError;</span>
-<span class="cstat-no" title="statement not covered">  var streamError;</span>
+Stream.prototype._transition = <span class="fstat-no" title="function not covered" >function transition(sending, frame) {</span>
+<span class="cstat-no" title="statement not covered" >  var receiving = !sending;</span>
+<span class="cstat-no" title="statement not covered" >  var connectionError;</span>
+<span class="cstat-no" title="statement not covered" >  var streamError;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered">  var DATA = false, HEADERS = false, PRIORITY = false, ALTSVC = false, BLOCKED = false;</span>
-<span class="cstat-no" title="statement not covered">  var RST_STREAM = false, PUSH_PROMISE = false, WINDOW_UPDATE = false;</span>
-<span class="cstat-no" title="statement not covered">  switch(frame.type) {</span>
-    case 'DATA'         : <span class="cstat-no" title="statement not covered">DATA          = true; <span class="cstat-no" title="statement not covered"></span>break;</span>
-    case 'HEADERS'      : <span class="cstat-no" title="statement not covered">HEADERS       = true; <span class="cstat-no" title="statement not covered"></span>break;</span>
-    case 'PRIORITY'     : <span class="cstat-no" title="statement not covered">PRIORITY      = true; <span class="cstat-no" title="statement not covered"></span>break;</span>
-    case 'RST_STREAM'   : <span class="cstat-no" title="statement not covered">RST_STREAM    = true; <span class="cstat-no" title="statement not covered"></span>break;</span>
-    case 'PUSH_PROMISE' : <span class="cstat-no" title="statement not covered">PUSH_PROMISE  = true; <span class="cstat-no" title="statement not covered"></span>break;</span>
-    case 'WINDOW_UPDATE': <span class="cstat-no" title="statement not covered">WINDOW_UPDATE = true; <span class="cstat-no" title="statement not covered"></span>break;</span>
-    case 'ALTSVC'       : <span class="cstat-no" title="statement not covered">ALTSVC        = true; <span class="cstat-no" title="statement not covered"></span>break;</span>
-    case 'BLOCKED'      : <span class="cstat-no" title="statement not covered">BLOCKED       = true; <span class="cstat-no" title="statement not covered"></span>break;</span>
+<span class="cstat-no" title="statement not covered" >  var DATA = false, HEADERS = false, PRIORITY = false, ALTSVC = false, BLOCKED = false;</span>
+<span class="cstat-no" title="statement not covered" >  var RST_STREAM = false, PUSH_PROMISE = false, WINDOW_UPDATE = false;</span>
+<span class="cstat-no" title="statement not covered" >  switch(frame.type) {</span>
+    case 'DATA'         : <span class="cstat-no" title="statement not covered" >DATA          = true; <span class="cstat-no" title="statement not covered" ></span>break;</span>
+    case 'HEADERS'      : <span class="cstat-no" title="statement not covered" >HEADERS       = true; <span class="cstat-no" title="statement not covered" ></span>break;</span>
+    case 'PRIORITY'     : <span class="cstat-no" title="statement not covered" >PRIORITY      = true; <span class="cstat-no" title="statement not covered" ></span>break;</span>
+    case 'RST_STREAM'   : <span class="cstat-no" title="statement not covered" >RST_STREAM    = true; <span class="cstat-no" title="statement not covered" ></span>break;</span>
+    case 'PUSH_PROMISE' : <span class="cstat-no" title="statement not covered" >PUSH_PROMISE  = true; <span class="cstat-no" title="statement not covered" ></span>break;</span>
+    case 'WINDOW_UPDATE': <span class="cstat-no" title="statement not covered" >WINDOW_UPDATE = true; <span class="cstat-no" title="statement not covered" ></span>break;</span>
+    case 'ALTSVC'       : <span class="cstat-no" title="statement not covered" >ALTSVC        = true; <span class="cstat-no" title="statement not covered" ></span>break;</span>
+    case 'BLOCKED'      : <span class="cstat-no" title="statement not covered" >BLOCKED       = true; <span class="cstat-no" title="statement not covered" ></span>break;</span>
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered">  var previousState = this.state;</span>
+<span class="cstat-no" title="statement not covered" >  var previousState = this.state;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered">  switch (this.state) {</span>
+<span class="cstat-no" title="statement not covered" >  switch (this.state) {</span>
     // All streams start in the **idle** state. In this state, no frames have been exchanged.
     //
     // * Sending or receiving a HEADERS frame causes the stream to become "open".
     //
     // When the HEADERS frame contains the END_STREAM flags, then two state transitions happen.
     case 'IDLE':
-<span class="cstat-no" title="statement not covered">      if (HEADERS) {</span>
-<span class="cstat-no" title="statement not covered">        this._setState('OPEN');</span>
-<span class="cstat-no" title="statement not covered">        if (frame.flags.END_STREAM) {</span>
-<span class="cstat-no" title="statement not covered">          this._setState(sending ? 'HALF_CLOSED_LOCAL' : 'HALF_CLOSED_REMOTE');</span>
+<span class="cstat-no" title="statement not covered" >      if (HEADERS) {</span>
+<span class="cstat-no" title="statement not covered" >        this._setState('OPEN');</span>
+<span class="cstat-no" title="statement not covered" >        if (frame.flags.END_STREAM) {</span>
+<span class="cstat-no" title="statement not covered" >          this._setState(sending ? 'HALF_CLOSED_LOCAL' : 'HALF_CLOSED_REMOTE');</span>
         }
-<span class="cstat-no" title="statement not covered">        this._initiated = sending;</span>
-      } else <span class="cstat-no" title="statement not covered">if (sending &amp;&amp; RST_STREAM) {</span>
-<span class="cstat-no" title="statement not covered">        this._setState('CLOSED');</span>
-      } else <span class="cstat-no" title="statement not covered">if (PRIORITY) {</span>
+<span class="cstat-no" title="statement not covered" >        this._initiated = sending;</span>
+      } else <span class="cstat-no" title="statement not covered" >if (sending &amp;&amp; RST_STREAM) {</span>
+<span class="cstat-no" title="statement not covered" >        this._setState('CLOSED');</span>
+      } else <span class="cstat-no" title="statement not covered" >if (PRIORITY) {</span>
         /* No state change */
       } else {
-<span class="cstat-no" title="statement not covered">        connectionError = 'PROTOCOL_ERROR';</span>
+<span class="cstat-no" title="statement not covered" >        connectionError = 'PROTOCOL_ERROR';</span>
       }
-<span class="cstat-no" title="statement not covered">      break;</span>
+<span class="cstat-no" title="statement not covered" >      break;</span>
 &nbsp;
     // A stream in the **reserved (local)** state is one that has been promised by sending a
     // PUSH_PROMISE frame.
@@ -1994,16 +1996,16 @@ Stream.prototype._transition = <span class="fstat-no" title="function not covere
     // * An endpoint may receive PRIORITY frame in this state.
     // * An endpoint MUST NOT send any other type of frame in this state.
     case 'RESERVED_LOCAL':
-<span class="cstat-no" title="statement not covered">      if (sending &amp;&amp; HEADERS) {</span>
-<span class="cstat-no" title="statement not covered">        this._setState('HALF_CLOSED_REMOTE');</span>
-      } else <span class="cstat-no" title="statement not covered">if (RST_STREAM) {</span>
-<span class="cstat-no" title="statement not covered">        this._setState('CLOSED');</span>
-      } else <span class="cstat-no" title="statement not covered">if (PRIORITY) {</span>
+<span class="cstat-no" title="statement not covered" >      if (sending &amp;&amp; HEADERS) {</span>
+<span class="cstat-no" title="statement not covered" >        this._setState('HALF_CLOSED_REMOTE');</span>
+      } else <span class="cstat-no" title="statement not covered" >if (RST_STREAM) {</span>
+<span class="cstat-no" title="statement not covered" >        this._setState('CLOSED');</span>
+      } else <span class="cstat-no" title="statement not covered" >if (PRIORITY) {</span>
         /* No state change */
       } else {
-<span class="cstat-no" title="statement not covered">        connectionError = 'PROTOCOL_ERROR';</span>
+<span class="cstat-no" title="statement not covered" >        connectionError = 'PROTOCOL_ERROR';</span>
       }
-<span class="cstat-no" title="statement not covered">      break;</span>
+<span class="cstat-no" title="statement not covered" >      break;</span>
 &nbsp;
     // A stream in the **reserved (remote)** state has been reserved by a remote peer.
     //
@@ -2013,16 +2015,16 @@ Stream.prototype._transition = <span class="fstat-no" title="function not covere
     // * An endpoint MAY send PRIORITY frames in this state to reprioritize the stream.
     // * Receiving any other type of frame MUST be treated as a stream error of type PROTOCOL_ERROR.
     case 'RESERVED_REMOTE':
-<span class="cstat-no" title="statement not covered">      if (RST_STREAM) {</span>
-<span class="cstat-no" title="statement not covered">        this._setState('CLOSED');</span>
-      } else <span class="cstat-no" title="statement not covered">if (receiving &amp;&amp; HEADERS) {</span>
-<span class="cstat-no" title="statement not covered">        this._setState('HALF_CLOSED_LOCAL');</span>
-      } else <span class="cstat-no" title="statement not covered">if (BLOCKED || PRIORITY) {</span>
+<span class="cstat-no" title="statement not covered" >      if (RST_STREAM) {</span>
+<span class="cstat-no" title="statement not covered" >        this._setState('CLOSED');</span>
+      } else <span class="cstat-no" title="statement not covered" >if (receiving &amp;&amp; HEADERS) {</span>
+<span class="cstat-no" title="statement not covered" >        this._setState('HALF_CLOSED_LOCAL');</span>
+      } else <span class="cstat-no" title="statement not covered" >if (BLOCKED || PRIORITY) {</span>
         /* No state change */
       } else {
-<span class="cstat-no" title="statement not covered">        connectionError = 'PROTOCOL_ERROR';</span>
+<span class="cstat-no" title="statement not covered" >        connectionError = 'PROTOCOL_ERROR';</span>
       }
-<span class="cstat-no" title="statement not covered">      break;</span>
+<span class="cstat-no" title="statement not covered" >      break;</span>
 &nbsp;
     // The **open** state is where both peers can send frames. In this state, sending peers observe
     // advertised stream level flow control limits.
@@ -2034,14 +2036,14 @@ Stream.prototype._transition = <span class="fstat-no" title="function not covere
     // * Either endpoint can send a RST_STREAM frame from this state, causing it to transition
     //   immediately to "closed".
     case 'OPEN':
-<span class="cstat-no" title="statement not covered">      if (frame.flags.END_STREAM) {</span>
-<span class="cstat-no" title="statement not covered">        this._setState(sending ? 'HALF_CLOSED_LOCAL' : 'HALF_CLOSED_REMOTE');</span>
-      } else <span class="cstat-no" title="statement not covered">if (RST_STREAM) {</span>
-<span class="cstat-no" title="statement not covered">        this._setState('CLOSED');</span>
+<span class="cstat-no" title="statement not covered" >      if (frame.flags.END_STREAM) {</span>
+<span class="cstat-no" title="statement not covered" >        this._setState(sending ? 'HALF_CLOSED_LOCAL' : 'HALF_CLOSED_REMOTE');</span>
+      } else <span class="cstat-no" title="statement not covered" >if (RST_STREAM) {</span>
+<span class="cstat-no" title="statement not covered" >        this._setState('CLOSED');</span>
       } else {
         /* No state change */
       }
-<span class="cstat-no" title="statement not covered">      break;</span>
+<span class="cstat-no" title="statement not covered" >      break;</span>
 &nbsp;
     // A stream that is **half closed (local)** cannot be used for sending frames.
     //
@@ -2050,14 +2052,14 @@ Stream.prototype._transition = <span class="fstat-no" title="function not covere
     // * An endpoint MAY send or receive PRIORITY frames in this state to reprioritize the stream.
     // * WINDOW_UPDATE can be sent by a peer that has sent a frame bearing the END_STREAM flag.
     case 'HALF_CLOSED_LOCAL':
-<span class="cstat-no" title="statement not covered">      if (RST_STREAM || (receiving &amp;&amp; frame.flags.END_STREAM)) {</span>
-<span class="cstat-no" title="statement not covered">        this._setState('CLOSED');</span>
-      } else <span class="cstat-no" title="statement not covered">if (BLOCKED || ALTSVC || receiving || PRIORITY || (sending &amp;&amp; WINDOW_UPDATE)) {</span>
+<span class="cstat-no" title="statement not covered" >      if (RST_STREAM || (receiving &amp;&amp; frame.flags.END_STREAM)) {</span>
+<span class="cstat-no" title="statement not covered" >        this._setState('CLOSED');</span>
+      } else <span class="cstat-no" title="statement not covered" >if (BLOCKED || ALTSVC || receiving || PRIORITY || (sending &amp;&amp; WINDOW_UPDATE)) {</span>
         /* No state change */
       } else {
-<span class="cstat-no" title="statement not covered">        connectionError = 'PROTOCOL_ERROR';</span>
+<span class="cstat-no" title="statement not covered" >        connectionError = 'PROTOCOL_ERROR';</span>
       }
-<span class="cstat-no" title="statement not covered">      break;</span>
+<span class="cstat-no" title="statement not covered" >      break;</span>
 &nbsp;
     // A stream that is **half closed (remote)** is no longer being used by the peer to send frames.
     // In this state, an endpoint is no longer obligated to maintain a receiver flow control window
@@ -2070,14 +2072,14 @@ Stream.prototype._transition = <span class="fstat-no" title="function not covere
     // * An endpoint MAY send or receive PRIORITY frames in this state to reprioritize the stream.
     // * A receiver MAY receive a WINDOW_UPDATE frame on a "half closed (remote)" stream.
     case 'HALF_CLOSED_REMOTE':
-<span class="cstat-no" title="statement not covered">      if (RST_STREAM || (sending &amp;&amp; frame.flags.END_STREAM)) {</span>
-<span class="cstat-no" title="statement not covered">        this._setState('CLOSED');</span>
-      } else <span class="cstat-no" title="statement not covered">if (BLOCKED || ALTSVC || sending || PRIORITY || (receiving &amp;&amp; WINDOW_UPDATE)) {</span>
+<span class="cstat-no" title="statement not covered" >      if (RST_STREAM || (sending &amp;&amp; frame.flags.END_STREAM)) {</span>
+<span class="cstat-no" title="statement not covered" >        this._setState('CLOSED');</span>
+      } else <span class="cstat-no" title="statement not covered" >if (BLOCKED || ALTSVC || sending || PRIORITY || (receiving &amp;&amp; WINDOW_UPDATE)) {</span>
         /* No state change */
       } else {
-<span class="cstat-no" title="statement not covered">        connectionError = 'PROTOCOL_ERROR';</span>
+<span class="cstat-no" title="statement not covered" >        connectionError = 'PROTOCOL_ERROR';</span>
       }
-<span class="cstat-no" title="statement not covered">      break;</span>
+<span class="cstat-no" title="statement not covered" >      break;</span>
 &nbsp;
     // The **closed** state is the terminal state.
     //
@@ -2100,23 +2102,23 @@ Stream.prototype._transition = <span class="fstat-no" title="function not covere
     //   causes a stream to become "reserved". If promised streams are not desired, a RST_STREAM
     //   can be used to close any of those streams.
     case 'CLOSED':
-<span class="cstat-no" title="statement not covered">      if (PRIORITY || (sending &amp;&amp; RST_STREAM) ||</span>
+<span class="cstat-no" title="statement not covered" >      if (PRIORITY || (sending &amp;&amp; RST_STREAM) ||</span>
           (receiving &amp;&amp; WINDOW_UPDATE) ||
           (receiving &amp;&amp; this._closedByUs &amp;&amp;
            (this._closedWithRst || RST_STREAM || ALTSVC))) {
         /* No state change */
       } else {
-<span class="cstat-no" title="statement not covered">        streamError = 'STREAM_CLOSED';</span>
+<span class="cstat-no" title="statement not covered" >        streamError = 'STREAM_CLOSED';</span>
       }
-<span class="cstat-no" title="statement not covered">      break;</span>
+<span class="cstat-no" title="statement not covered" >      break;</span>
   }
 &nbsp;
   // Noting that the connection was closed by the other endpoint. It may be important in edge cases.
   // For example, when the peer tries to cancel a promised stream, but we already sent every data
   // on it, then the stream is in CLOSED state, yet we want to ignore the incoming RST_STREAM.
-<span class="cstat-no" title="statement not covered">  if ((this.state === 'CLOSED') &amp;&amp; (previousState !== 'CLOSED')) {</span>
-<span class="cstat-no" title="statement not covered">    this._closedByUs = sending;</span>
-<span class="cstat-no" title="statement not covered">    this._closedWithRst = RST_STREAM;</span>
+<span class="cstat-no" title="statement not covered" >  if ((this.state === 'CLOSED') &amp;&amp; (previousState !== 'CLOSED')) {</span>
+<span class="cstat-no" title="statement not covered" >    this._closedByUs = sending;</span>
+<span class="cstat-no" title="statement not covered" >    this._closedWithRst = RST_STREAM;</span>
   }
 &nbsp;
   // Sending/receiving a PUSH_PROMISE
@@ -2125,30 +2127,30 @@ Stream.prototype._transition = <span class="fstat-no" title="function not covere
   //   for the reserved stream transitions to "reserved (local)".
   // * Receiving a PUSH_PROMISE frame marks the associated stream as reserved by the remote peer.
   //   The state of the stream becomes "reserved (remote)".
-<span class="cstat-no" title="statement not covered">  if (PUSH_PROMISE &amp;&amp; !connectionError &amp;&amp; !streamError) {</span>
+<span class="cstat-no" title="statement not covered" >  if (PUSH_PROMISE &amp;&amp; !connectionError &amp;&amp; !streamError) {</span>
     /* This assertion must hold, because _transition is called immediately when a frame is written
        to the stream. If it would be called when a frame gets out of the input queue, the state
        of the reserved could have been changed by then. */
-<span class="cstat-no" title="statement not covered">    assert(frame.promised_stream.state === 'IDLE', frame.promised_stream.state);</span>
-<span class="cstat-no" title="statement not covered">    frame.promised_stream._setState(sending ? 'RESERVED_LOCAL' : 'RESERVED_REMOTE');</span>
-<span class="cstat-no" title="statement not covered">    frame.promised_stream._initiated = sending;</span>
+<span class="cstat-no" title="statement not covered" >    assert(frame.promised_stream.state === 'IDLE', frame.promised_stream.state);</span>
+<span class="cstat-no" title="statement not covered" >    frame.promised_stream._setState(sending ? 'RESERVED_LOCAL' : 'RESERVED_REMOTE');</span>
+<span class="cstat-no" title="statement not covered" >    frame.promised_stream._initiated = sending;</span>
   }
 &nbsp;
   // Signaling how sending/receiving this frame changes the active stream count (-1, 0 or +1)
-<span class="cstat-no" title="statement not covered">  if (this._initiated) {</span>
-<span class="cstat-no" title="statement not covered">    var change = (activeState(this.state) - activeState(previousState));</span>
-<span class="cstat-no" title="statement not covered">    if (sending) {</span>
-<span class="cstat-no" title="statement not covered">      frame.count_change = change;</span>
+<span class="cstat-no" title="statement not covered" >  if (this._initiated) {</span>
+<span class="cstat-no" title="statement not covered" >    var change = (activeState(this.state) - activeState(previousState));</span>
+<span class="cstat-no" title="statement not covered" >    if (sending) {</span>
+<span class="cstat-no" title="statement not covered" >      frame.count_change = change;</span>
     } else {
-<span class="cstat-no" title="statement not covered">      frame.count_change(change);</span>
+<span class="cstat-no" title="statement not covered" >      frame.count_change(change);</span>
     }
-  } else <span class="cstat-no" title="statement not covered">if (sending) {</span>
-<span class="cstat-no" title="statement not covered">    frame.count_change = 0;</span>
+  } else <span class="cstat-no" title="statement not covered" >if (sending) {</span>
+<span class="cstat-no" title="statement not covered" >    frame.count_change = 0;</span>
   }
 &nbsp;
   // Common error handling.
-<span class="cstat-no" title="statement not covered">  if (connectionError || streamError) {</span>
-<span class="cstat-no" title="statement not covered">    var info = {</span>
+<span class="cstat-no" title="statement not covered" >  if (connectionError || streamError) {</span>
+<span class="cstat-no" title="statement not covered" >    var info = {</span>
       error: connectionError,
       frame: frame,
       state: this.state,
@@ -2157,9 +2159,9 @@ Stream.prototype._transition = <span class="fstat-no" title="function not covere
     };
 &nbsp;
     // * When sending something invalid, throwing an exception, since it is probably a bug.
-<span class="cstat-no" title="statement not covered">    if (sending) {</span>
-<span class="cstat-no" title="statement not covered">      this._log.error(info, 'Sending illegal frame.');</span>
-<span class="cstat-no" title="statement not covered">      return this.emit('error', new Error('Sending illegal frame (' + frame.type + ') in ' + this.state + ' state.'));</span>
+<span class="cstat-no" title="statement not covered" >    if (sending) {</span>
+<span class="cstat-no" title="statement not covered" >      this._log.error(info, 'Sending illegal frame.');</span>
+<span class="cstat-no" title="statement not covered" >      return this.emit('error', new Error('Sending illegal frame (' + frame.type + ') in ' + this.state + ' state.'));</span>
     }
 &nbsp;
     // * In case of a serious problem, emitting and error and letting someone else handle it
@@ -2167,12 +2169,12 @@ Stream.prototype._transition = <span class="fstat-no" title="function not covere
     // * When receiving something invalid, sending an RST_STREAM using the `reset` method.
     //   This will automatically cause a transition to the CLOSED state.
     else {
-<span class="cstat-no" title="statement not covered">      this._log.error(info, 'Received illegal frame.');</span>
-<span class="cstat-no" title="statement not covered">      if (connectionError) {</span>
-<span class="cstat-no" title="statement not covered">        this.emit('connectionError', connectionError);</span>
+<span class="cstat-no" title="statement not covered" >      this._log.error(info, 'Received illegal frame.');</span>
+<span class="cstat-no" title="statement not covered" >      if (connectionError) {</span>
+<span class="cstat-no" title="statement not covered" >        this.emit('connectionError', connectionError);</span>
       } else {
-<span class="cstat-no" title="statement not covered">        this.reset(streamError);</span>
-<span class="cstat-no" title="statement not covered">        this.emit('error', streamError);</span>
+<span class="cstat-no" title="statement not covered" >        this.reset(streamError);</span>
+<span class="cstat-no" title="statement not covered" >        this.emit('error', streamError);</span>
       }
     }
   }
@@ -2184,20 +2186,19 @@ Stream.prototype._transition = <span class="fstat-no" title="function not covere
 exports.serializers = {};
 &nbsp;
 var nextId = 0;
-exports.serializers.s = <span class="fstat-no" title="function not covered">function(stream) {</span>
-<span class="cstat-no" title="statement not covered">  if (!('_id' in stream)) {</span>
-<span class="cstat-no" title="statement not covered">    stream._id = nextId;</span>
-<span class="cstat-no" title="statement not covered">    nextId += 1;</span>
+exports.serializers.s = <span class="fstat-no" title="function not covered" >function(stream) {</span>
+<span class="cstat-no" title="statement not covered" >  if (!('_id' in stream)) {</span>
+<span class="cstat-no" title="statement not covered" >    stream._id = nextId;</span>
+<span class="cstat-no" title="statement not covered" >    nextId += 1;</span>
   }
-<span class="cstat-no" title="statement not covered">  return stream._id;</span>
+<span class="cstat-no" title="statement not covered" >  return stream._id;</span>
 };
 &nbsp;
 &nbsp;</pre></td></tr>
-</tbody></table></pre>
+</table></pre>
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 11 2017 23:30:01 GMT+0000 (UTC)</div>
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Wed Apr 19 2017 05:49:49 GMT+0000 (UTC)</div>
 </div>
-
-
-</body></html>
+</body>
+</html>
